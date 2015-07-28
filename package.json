@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/mmarcinek/simple_node_server#readme",
   "dependencies": {
-    "express": "^4.13.1"
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "mongoose": "^4.1.0"
   }
 }
