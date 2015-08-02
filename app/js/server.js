@@ -9,6 +9,7 @@ var express    = require('express');      // call express
 var app        = express();               // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
+var Shop       = require('./app/models/shops');  // Gets the module and Schema from shops.js
 
 // configure app to use bodyParser()
 // this will get the data from a POST req
