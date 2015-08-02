@@ -2,7 +2,7 @@
 var mongoose   = require('mongoose');
 var Schema     = mongoose.Schema;
 
-// creates new Schema called Shop
+// creates new Schema called Shops
 var ShopSchema = new Schema({
   name: String
 });
