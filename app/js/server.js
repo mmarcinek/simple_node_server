@@ -9,7 +9,8 @@ var express    = require('express');      // call express
 var app        = express();               // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
-var Shop       = require('./app/models/shops');  // Gets the module and Schema from shops.js
+var Shop       = require('../js/models/shops.js');  // Gets the module and Schema from shops.js
+var keys     = require('../js/keys.js');
 
 // configure app to use bodyParser()
 // this will get the data from a POST req
@@ -20,7 +21,7 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;      // sets our PORT
 
 // connects to the MongoLab MongoDB sandbox database:
-mongoose.connect(' mongodb://michael_admin:' + dbpass + '@ds063240.mongolab.com:63240/simple_node_test');
+mongoose.connect('mongodb://michael_admin:' + keys.db.password + '@ds063240.mongolab.com:63240/simple_node_test');
 
 // Routes for our API
 // ==============================================================================
