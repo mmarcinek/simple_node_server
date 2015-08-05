@@ -47,7 +47,11 @@ router.route('/shops')
   .post(function(req,res){
 
     var shop = new Shops(); // create a new instance of Shop model
-    shop.name = req.body.name; // sets the shops name (from req)
+    shop.name = req.body.name; // sets the shops name (from req) to model
+    shop.address = req.body.address; //sets the shop address (from req) to model
+    shop.city = req.body.city; // sets the shop city (from req) to model
+    shop.state = req.body.state // sets the shop state (from req) to model
+    shop.zipcode = req.body.zipcode // sets the shop zipcode (from req) to model
 
     // save shopa and checko for errors
     shop.save(function(err) {
