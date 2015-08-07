@@ -53,7 +53,7 @@ router.route('/shops')
     shop.state = req.body.state // sets the shop state (from req) to model
     shop.zipcode = req.body.zipcode // sets the shop zipcode (from req) to model
 
-    // save shopa and checko for errors
+    // save shops and checks for errors
     shop.save(function(err) {
       if (err)
         re.send(err);
