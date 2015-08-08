@@ -49,6 +49,27 @@ app.get('/', function(req, res) {
   res.send('Hooray! The API is set at http://localhost:' + port + '/api');
 });
 
+// creates a /setup route and a sample user
+app.get('/setup', function(req, res) {
+
+  // create a sample user
+  var mike = new User({
+    first_name: 'Mike',
+    last_name: 'Marcinek'
+    password: 'password',
+    admin: true
+  });
+
+  // save sample user
+  mike.save( function(err) {
+    if (err) throw err;
+
+    console.log('User saved succesfully');
+    res.json({ success: true });
+  });
+});
+
+// creates routes relating to /shops
 router.route('/shops')
 
   // create a shop (accessed at POST http://localhost:8080/api/shops)
