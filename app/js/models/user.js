@@ -1,18 +1,11 @@
-var user = function (data) {
-  this.data = data;
-}
+// Gets an instance of mongoose and mongoose.Schema
 
-User.prototype.data = {}
+var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
-User.prototype.changeName = function (name) {
-  this.data.name = name;
-}
-
-User.findById = function (id, callback) {
-  db.get('user', {id: id}).run(function (err, data) {
-    if (err) return callback(err);
-    callback(null, new User(data));
-  });
-}
-
-module.exports = User;
+// create a mongoose model and pass it with module.exports
+module.exports = mongoose.model('User', new Schema({
+  first_name: String,
+  password: String,
+  admin: Boolean
+}));

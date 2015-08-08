@@ -9,11 +9,13 @@ var express    = require('express');      // call express
 var app        = express();               // define our app using express
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
-var Shops      = require('../js/models/shops.js');  // Gets the module and Schema from shops.js
-var keys       = require('../js/keys.js');
 
-var jwt        = require('jsonwebtoken'); // used to create, sign in, and verufy tokens
+var jwt        = require('jsonwebtoken'); // used to create, sign in, and verify tokens
 var morgan     = require('morgan'); // logs requests to the console.
+
+var keys       = require('../js/keys.js');
+var Shops      = require('../js/models/shops.js');  // Gets the module and Schema from shops.js
+
 
 // configure app to use bodyParser()
 // this will get the data from a POST req
