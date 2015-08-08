@@ -8,25 +8,25 @@
 var express    = require('express');      // call express
 var app        = express();               // define our app using express
 var bodyParser = require('body-parser');
+var morgan     = require('morgan'); // logs requests to the console.
 var mongoose   = require('mongoose');
 
 var jwt        = require('jsonwebtoken'); // used to create, sign in, and verify tokens
-var morgan     = require('morgan'); // logs requests to the console.
-
 var keys       = require('../js/keys.js');
 var Shops      = require('../js/models/shops.js');  // Gets the module and Schema from shops.js
-
+var User       = require('../js/models/user.js'); // Gets the module and Schema from user.js
 
 // configure app to use bodyParser()
 // this will get the data from a POST req
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;      // sets our PORT
 
 // connects to the MongoLab MongoDB sandbox database:
-mongoose.connect('mongodb://michael_admin:' + keys.db.password + '@ds063240.mongolab.com:63240/simple_node_test');
+mongoose.connect(keys.database); // connect to database
+app.set('secretOfSecrets', keys.secret) // secret variable
 
 // Routes for API
 // ==============================================================================
