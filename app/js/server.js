@@ -43,7 +43,7 @@ router.use(function(req,res,next){
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 
 router.get('/', function(req, res) {
-  res.json({ message: 'Hooray! Welcome to your first API!'});
+  res.send({ 'Hooray! Welcome to your first API! It is set at http://' + port + '/api'});
 });
 
 router.route('/shops')
