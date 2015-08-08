@@ -45,7 +45,7 @@ app.use(morgan('dev'));
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 
-router.get('/', function(req, res) {
+app.get('/', function(req, res) {
   res.send('Hooray! The API is set at http://localhost:' + port + '/api');
 });
 
