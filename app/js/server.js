@@ -72,6 +72,7 @@ app.get('/setup', function(req, res) {
 });
 
 // creates routes relating to users
+// =============================================================
 router.get('/', function(req,res) {
   res.json({ message: 'Welcome to what will become the API for Bikeways' });
 });
@@ -82,6 +83,8 @@ router.get('/users', function (req, res){
   });
 });
 
+// Authenticate User
+// =============================================================
 router.post('/authenticate', function (req, res) {
 
   // find the user
@@ -105,14 +108,21 @@ router.post('/authenticate', function (req, res) {
         var token = jwt.sign(user, app.get('secretOfSecrets'), {
           expiresInMinutes: 1440 // 24 hours
         });
+
+        // return success and token as JSON
+        res.json({
+          success: true,
+          message: 'Token passed, thank you!',
+          token: token
+        });
       }
 
     }
   });
-
 });
 
 // creates routes relating to /shops
+// =================================================================
 router.route('/shops')
 
   // create a shop (accessed at POST http://localhost:8080/api/shops)
