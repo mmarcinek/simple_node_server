@@ -16,20 +16,24 @@ var keys       = require('../js/keys.js');
 var Shops      = require('../js/models/shops.js');  // Gets the module and Schema from shops.js
 var User       = require('../js/models/user.js'); // Gets the module and Schema from user.js
 
-// configure app to use bodyParser()
-// this will get the data from a POST req
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
+// confuguration
 var port = process.env.PORT || 8080;      // sets our PORT
 
 // connects to the MongoLab MongoDB sandbox database:
 mongoose.connect(keys.database); // connect to database
 app.set('secretOfSecrets', keys.secret) // secret variable
 
+// configure app to use bodyParser()
+// this will get the data from a POST req
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // Routes for API
 // ==============================================================================
+
+// use morgan to log requests to the console
+app.use(morgan('dev'));
 
 var router = express.Router();            // get an instance of the express Router
 
@@ -39,9 +43,6 @@ router.use(function(req,res,next){
   console.log('Your request is being processed');
   next(); // continues to next route
 });
-
-// use morgan to log requests to the console
-app.use(morgan('dev'));
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 
@@ -55,18 +56,23 @@ app.get('/setup', function(req, res) {
   // create a sample user
   var mike = new User({
     first_name: 'Mike',
-    last_name: 'Marcinek'
+    last_name: 'Marcinek',
     password: 'password',
     admin: true
   });
 
   // save sample user
-  mike.save( function(err) {
+  mike.save(function(err) {
     if (err) throw err;
 
     console.log('User saved succesfully');
     res.json({ success: true });
   });
+});
+
+// creates routes relating to users
+router.get('/', function(req,res) {
+  res.json({ message: 'Welcome to what will become the API for Bikeways' });
 });
 
 // creates routes relating to /shops
