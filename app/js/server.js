@@ -57,6 +57,7 @@ app.get('/setup', function(req, res) {
   var mike = new User({
     first_name: 'Mike',
     last_name: 'Marcinek',
+    user_name: 'mmarcinek',
     password: 'password',
     admin: true
   });
@@ -79,6 +80,36 @@ router.get('/users', function (req, res){
   User.find({}, function (err, users) {
     res.json(users);
   });
+});
+
+router.post('/authenticate', function (req, res) {
+
+  // find the user
+  User.findOne({
+    user_name: req.body.user_name
+  }, function(err, user){
+
+    if (err) throw err;
+
+    if(!user){
+      res.json({ success: false, message: 'Authentication failed. User not found.'});
+    } else if (user){
+
+      // check to see if password matches
+      if(user.password != req.body.password) {
+        res.json({ success: false, message: 'Authentication failed. Wrong password.'});
+      } else {
+
+        // if user is found and password is correct
+        // create a token
+        var token = jwt.sign(user, app.get('secretOfSecrets'), {
+          expiresInMinutes: 1440 // 24 hours
+        });
+      }
+
+    }
+  });
+
 });
 
 // creates routes relating to /shops
