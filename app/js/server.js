@@ -75,6 +75,12 @@ router.get('/', function(req,res) {
   res.json({ message: 'Welcome to what will become the API for Bikeways' });
 });
 
+router.get('/users', function (req, res){
+  User.find({}, function (err, users) {
+    res.json(users);
+  });
+});
+
 // creates routes relating to /shops
 router.route('/shops')
 
